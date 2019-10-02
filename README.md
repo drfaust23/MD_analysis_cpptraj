@@ -305,6 +305,20 @@ cluster C0  dbscan minpoints 50 epsilon 2.0 \
 위에 있는 cpptraj 명령을 찬찬히 살펴봅시다. 
 자세한 내용은 [cpptraj manual](https://amber-md.github.io/cpptraj/CPPTRAJ.xhtml)을 참고하세요.
 
+*cluster* 명령은 clustering 분석을 수행하겠다는 뜻입니다. 
+cluster 명령 뒤에 나오는 C0는 데이터셋의 이름을 뜻합니다. 앞에서 했던 수소결합 분석과 유사하게 클러스터링 결과로 나오는 수치적인 데이터들이 C0라는 이름의 데이터셋이 모두 저장되게 됩니다. 
+그 뒤에 오는 dbscan은 [DBSCAN](https://bcho.tistory.com/1205) 이라는 잘 알려진 *밀도기반* 클러스터링 알고리즘을 사용하겠다는 뜻입니다. 
+DBSCAN 이외에도 다른 몇 가지 clustering 방식들이 존재하기 때문에 필요에 따라서 선택해서 사용하면 됩니다 (kmeans, hierarchical agglomerative (bottom-up) approach, density peaks algorithm). 
+일반적으로 DBSCAN은 많은 경우 잘 작동하는 것으로 알려져있기 때문에 여기에서는 dbscan을 사용하겠습니다. 
+
+dbscan뒤에 오는 *minpoints*와 *epsilon* 옵션은 DBSCAN을 수행할 때 필요한 option입니다. 
+*minpoints N*은 *N*개 이상의 데이터가 모였을 때, 하나의 클러스터로 간주하겠다는 뜻입니다. 
+*epsilon <dist>*은 *<dist>*로 정의된 거리 보다 짧은 거리 안에 존재하는 데이터를 하나의 클러스터로 묶어준다는 뜻입니다. 
+
+**즉, epsilon 값이 작으면 작을 수록 클러스터의 개수는 많아지고, epsilon값이 크면 클러스터의 개수는 적어지게 됩니다.**
+DBSCAN의 가장 큰 특징은 클러스트의 개수를 사용자가 미리 정하지 않고, 알고리즘에 의해서 결정된다는 것입니다. 
+
+
 
 
 ## How to run cpptraj using single & multiple CPUs 
