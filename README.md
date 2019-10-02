@@ -215,7 +215,42 @@ Frame에 따라 각 수소 결합의 총 개수를 nhbvtime.agr이라는 파일�
 
 Lifetime analysis는 각 수소결합이 **얼마나 오래 유지되는지**를 알려줍니다. 
 
+만일 어떤 수소 결합이 다음과 같은 패턴으로 형성되었다고 합시다. 
+{1 1 1 1 0 0 1 1 0 0 0 1 }
 
+그렇다면 위의 수소 결합 형성 패턴은 다음과 같다고 볼 수 있습니다. 
+Lifetime이 4인 결합이 1번, lifetime이 2인 결합이 1번, lifetime이 1인 결합이 1번 이렇게 총 3번 형성되었다고 볼 수 있습니다. 
+즉, 다시 말해서 평균 lifetime은 (4 + 2 + 1) / 3 = 2.333, Max lifetime은 4 라고 볼 수 있습니다. 
+이와 같이 특정 수소 결합이 형성되면 평균적으로 얼마만큼 유지가 되는지를 계산해주는 명령입니다. 
+
+Lifetime 분석 명령은 다음과 같습니다. 
+
+```
+lifetime HB[solutehb]  out HB.solutehb.lifetime.dat
+runanalysis
+```
+
+위 명령에서 HB[solutehb]는 solute-solute 수소 결합의 정보를 가지고 있는 데이터셋입니다. 
+앞선 예제와 비슷하게 hbond의 데이터셋 이름을 HB로 지정하면, cpptraj 내부적으로 HB[solutehb] 라는 데이터셋이 자동으로 생성됩니다.
+
+*out* option 다음에는 결과 파일의 이름을 써줍니다. 
+
+그리고 *runanalysis* 라는 명령을 만나면 실제로 lifetime 명령이 실행되게 됩니다.
+
+Lifetime analysis가 제대로 되었다면 다음과 같은 결과를 볼 수 있습니다. 
+```
+#Set     lifetime_04302 lifetime_04302[max] lifetime_04302[avg] lifetime_04302[frames]         lifetime_04302[name]
+       1              8                   1              1.0000                      8     DA5_1@O4'-DA5_1@O5'-HO5'
+       2          65104                  62              4.6607                 303428      DA5_1@N3-DA5_1@O5'-HO5'
+       3              5                   2              1.2000                      6     DA5_1@O3'-DA5_1@O5'-HO5'
+       4             24                  48              8.7500                    210      DG_2@OP1-DA5_1@O5'-HO5'
+       5             26                  14              4.1923                    109      DG_2@OP2-DA5_1@O5'-HO5'
+       6              6                   5              2.6667                     16      DG_2@O4'-DA5_1@O5'-HO5'
+       7              2                   1              1.0000                      2       DG_2@N3-DA5_1@O5'-HO5'
+       8              4                   1              1.0000                      4     DT3_34@O4-DA5_1@O5'-HO5'
+       9            103                  27              3.0485                    314     DT3_34@O2-DA5_1@O5'-HO5'
+```
+각 수소 결합의 max lifetime ([max]), average lifetime ([avg])를 확인할 수 있습니다. 
 
 
 ## Clustering analysis
