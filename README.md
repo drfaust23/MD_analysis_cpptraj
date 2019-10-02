@@ -3,7 +3,7 @@ How to analyze MD trajectories using CPPTRAJ
 
 ## Prerequsitories
 필요한 것:
-Amber 프로그램 suite - 그 중에서 이 tutorial 에서는 cpptraj 프로그램을 사용하는 법을 다룰 예정임. 
+Amber 프로그램 suite - 그 중에서 이 tutorial 에서는 cpptraj 프로그램을 사용하는 법을 다룰 예정입니다. 
 LCBC 학생들은 master의 /opt/amber18/에 설치되어 있는 Amber를 사용하면 됩니다. 
 MD trajectory files. (*.nc or *.mdcrd)
 Parameter files. (*.prmtop)
@@ -16,3 +16,5 @@ Parameter files. (*.prmtop)
 ```
 # Set up parameter & topology files.
 parm msdx-rf-l1-solv.prmtop                                                                                                     ```                              
+
+일단 parameter 파일
