@@ -179,7 +179,9 @@ series uuseries uuhbonds.agr uvseries uvhbonds.agr
 ```
 
 확장자가 **.agr**인 파일은 xmgrace라는 그래프 그려주는 프로그램의 input파일을 뜻합니다.
+
 이 때 생성되는 그래프의 *X축은 frame number, Y축은 수소결합이 형성되었으면 1, 그렇지 않으면 0으로 표현됩니다.*
+
 우분투에서 xmgrace가 설치되어 있지 않다면 apt으로 다음과 같이 간단히 설치할 수 있습니다. 
 
 ```console
@@ -191,9 +193,27 @@ foo@master:~$ sudo apt install xmgrace
 foo@master:~$ xmgrace uuhbonds.agr
 ```
 
+### Print out Timeseries
+
+예시 input 파일에서 hbond 명령어 밑에 다음과 같은 명령어가 존재합니다. 
+아래 명령어는 **시간에 따른 수소결합 개수의 변화**를 **nhbvtime.agr**이라는 파일에 저장하겠다는 뜻입니다. 
+그 뒤 *run*이라는 명령어를 만났을 때, cpptraj는 실제로 수소 결합 분석을 수행하게 됩니다. 
+
+앞에서 hbond 명령어에서 수소 결합의 결과를 **HB**라는 이름의 데이터셋으로 저장하였습니다. 
+이렇게 저장을 하면 cpptraj는 *자동으로* **HB[UU], HB[UV], HB[Bridge]** 라는 데이터셋을 내부적으로 생성하게 됩니다. 
+HB[UU]는 solute-solute 수소 결합의 개수, HB[UV]는 solute-solvent 수소 결합의 개수, HB[Bridge]는 염다리의 개수를 의미합니다.
+Frame에 따라 각 수소 결합의 총 개수를 nhbvtime.agr이라는 파일에 저장하게 됩니다. 
+
+```
+create nhbvtime.agr  HB[UU]  HB[UV]  HB[Bridge]
+run
+```
 
 ### Lifetime analysis
+수소 결합 분석이 끝난 후, 수소 결합 분석 결과를 바탕으로 lifetime analysis를 수행할 수 있습니다. 
+
 Lifetime analysis는 각 수소결합이 **얼마나 오래 유지되는지**를 알려줍니다. 
+
 
 
 
