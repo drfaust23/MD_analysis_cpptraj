@@ -10,7 +10,9 @@ MD trajectory files. (*.nc or *.mdcrd)
 Parameter files. (*.prmtop)
 
 ## Quick start
-아래에 있는 script는 cpptraj 프로그램을 이용해서 MD trajectory에서 RMSD, hydrogen-bond, 그리고 lifetime 분석을 script입니다. 
+아래에 있는 script는 cpptraj 프로그램을 이용해서 MD trajectory에서 RMSD, hydrogen-bond, 그리고 lifetime 분석을 수행하는 script입니다.
+전체 파일은 같은 repository에 업로드 되어 있습니다.  
+
 본 script를 하나씩 따라가면서 어떻게 분석이 수행되는지 살펴봅시다.
 *rmsd_and_hbond_analysis.in*
 
@@ -46,3 +48,21 @@ trajin step5_102.nc 1 last 10
 ...
 ```
 
+### Centering atoms 
+일반적으로 MD simulation을 수행하면 periodic boundary condition 때문에 residue가 이상하게 위치하고 있는 경우가 많습니다.
+
+이럴 때, autoimage는 trajectory를 보기 좋게 다시 정렬해주는 명령어입니다. 
+```
+autoimage
+```
+
+### RMSD 계산
+RMSD 는 Root Mean Squared Deviation의 줄임말로써, 평균적으로 분자를 이루고 있는 원자들이 기준이 되는 구조와 비교하였을 때, 몇 A정도 변화하였는지를 나타내는 값입니다. 
+아래는 cpptraj에서 RMSD를 계산하는 명령어입니다. 
+
+```
+rms ToFirstHeavy :1-148&!@H=    first out ToFirst_heavy.rms.txt mass
+```
+
+첫번째, rms 명령어는 rmsd 계산을 수행하겠다는 뜻입니다. 
+두번째인 ToFirstHeavy는 계산된 rmsd 값이 들어있는 dataset 의 이름을 의미합니다. 이 데이터셋은 나중에 다른 계산을 위해서 불러올 수 있기 때문에 이름을 지정해주게 됩니다. 
