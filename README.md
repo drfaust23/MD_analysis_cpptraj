@@ -106,6 +106,7 @@ HB 데이터셋에 저장된 내용은 추후에 추가적인 계산에 사용�
 
 solventdonor와 solventacceptor는 각각 solvent에 존재하는 수소 결합 주개와 받개를 지정해주게 됩니다. 물이 아닌 다른 유기 용매가 사용되었다면 그에 맞게 수정이 필요합니다. 이번 예제에서는 solvent가 물이기 때문에 위와 같이 주어졌습니다. 
 
+#### average solute-solute hydrogen bond analysis
 그 뒤에 따라오는 *avgout* 옵션은 solute안에서 생성되는 수소 결합 (solute-solute hydrogen bond) 의 평균 값을 표시하게 됩니다.
 예시 결과는 다음과 같습니다. 
 ```
@@ -134,4 +135,20 @@ Frac열은 전체 trajectory중에서 해당 수소 결합이 관찰된 fraction
 그러므로 simulation이 진행되는 거의 대부분의 시간 동안 첫번째 수소 결합은 유지되고 있다는 것을 알 수 있습니다. 
 
 마지막 2열은 평균 수소 결합의 길이와 각도를 보여주고 있습니다. 
+
+#### average solute-solvent hydrogen bond analysis
+위의 분석과 비슷하게 *solvout* option 뒤에는 solute와 solvent 사이에 형성되는 수소 결합의 분석 결과를 보여줍니다. 
+```
+#Solute-Solvent Hbonds:
+#Acceptor                DonorH           Donor    Count         Frac      AvgDist       AvgAng
+DT_13@OP2              SolventH      SolventDnr  1008589       2.5152       2.7282     161.7765
+DA_31@OP2              SolventH      SolventDnr  1008408       2.5147       2.7261     161.8580
+DC_26@OP2              SolventH      SolventDnr  1003021       2.5013       2.7276     161.6394
+DC_33@OP2              SolventH      SolventDnr  1002656       2.5004       2.7264     161.8224
+DG_32@OP2              SolventH      SolventDnr  1002198       2.4992       2.7279     161.7294
+DA_25@OP2              SolventH      SolventDnr  1000667       2.4954       2.7284     161.7174
+LYS_146@OXT            SolventH      SolventDnr  1000629       2.4953       2.7088     162.4099
+DT_14@OP2              SolventH      SolventDnr  1000571       2.4952       2.7276     161.7065
+```
+
 
