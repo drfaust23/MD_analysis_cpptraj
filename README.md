@@ -199,15 +199,16 @@ foo@master:~$ xmgrace uuhbonds.agr
 아래 명령어는 **시간에 따른 수소결합 개수의 변화**를 **nhbvtime.agr**이라는 파일에 저장하겠다는 뜻입니다. 
 그 뒤 *run*이라는 명령어를 만났을 때, cpptraj는 실제로 수소 결합 분석을 수행하게 됩니다. 
 
-앞에서 hbond 명령어에서 수소 결합의 결과를 **HB**라는 이름의 데이터셋으로 저장하였습니다. 
-이렇게 저장을 하면 cpptraj는 *자동으로* **HB[UU], HB[UV], HB[Bridge]** 라는 데이터셋을 내부적으로 생성하게 됩니다. 
-HB[UU]는 solute-solute 수소 결합의 개수, HB[UV]는 solute-solvent 수소 결합의 개수, HB[Bridge]는 염다리의 개수를 의미합니다.
-Frame에 따라 각 수소 결합의 총 개수를 nhbvtime.agr이라는 파일에 저장하게 됩니다. 
 
 ```
 create nhbvtime.agr  HB[UU]  HB[UV]  HB[Bridge]
 run
 ```
+
+앞에서 hbond 명령어에서 수소 결합의 결과를 **HB**라는 이름의 데이터셋으로 저장하였습니다. 
+이렇게 저장을 하면 cpptraj는 *자동으로* **HB[UU], HB[UV], HB[Bridge]** 라는 데이터셋을 내부적으로 생성하게 됩니다. 
+HB[UU]는 solute-solute 수소 결합의 개수, HB[UV]는 solute-solvent 수소 결합의 개수, HB[Bridge]는 염다리의 개수를 의미합니다.
+Frame에 따라 각 수소 결합의 총 개수를 nhbvtime.agr이라는 파일에 저장하게 됩니다. 
 
 ### Lifetime analysis
 수소 결합 분석이 끝난 후, 수소 결합 분석 결과를 바탕으로 lifetime analysis를 수행할 수 있습니다. 
