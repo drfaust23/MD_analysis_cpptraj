@@ -171,7 +171,31 @@ Bridge Res 25:DA   26:DC  , 133495 frames.
 ```
 어떤 residue들이 얼마나 자주 salt bridge를 형성하는지 알 수 있습니다. 
 
+### Timeseries plot 
+수소결합 분석의 마지막줄에 있는 다음 명령어는 각 수소결합이 언제 형성되고 사라지는지를 표시해주는 파일을 생성합니다.
+
+```
+series uuseries uuhbonds.agr uvseries uvhbonds.agr
+```
+
+확장자가 **.agr**인 파일은 xmgrace라는 그래프 그려주는 프로그램의 input파일을 뜻합니다.
+이 때 생성되는 그래프의 *X축은 frame number, Y축은 수소결합이 형성되었으면 1, 그렇지 않으면 0으로 표현됩니다.*
+우분투에서 xmgrace가 설치되어 있지 않다면 apt으로 다음과 같이 간단히 설치할 수 있습니다. 
+
+```console
+sudo apt install xmgrace
+```
+그 후에 다음 명령으로 그래프를 확인할 수 있습니다. 
+
+```console
+xmgrace uuhbonds.agr
+```
+
+
 ### Lifetime analysis
+Lifetime analysis는 각 수소결합이 **얼마나 오래 유지되는지**를 알려줍니다. 
+
+
 
 ## Clustering analysis
 
