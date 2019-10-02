@@ -154,6 +154,8 @@ DT_14@OP2              SolventH      SolventDnr  1000571       2.4952       2.72
 위의 결과에서 fraction이 1보다 큰 값이 나오는 이유는 2개 이상의 water molecule이 acceptor에 결합할 수 있기 때문입니다. 
 
 #### average salt bridge 
+[salt bridge(염다리)](https://en.wikipedia.org/wiki/Salt_bridge_(protein_and_supramolecular)는 이온결합과 수소결합이 동시에 나타나는 형태를 뜻합니다. 
+*bridgeout* option 뒤에 salt bridge 분석 결과가 출력될 파일의 이름을 써줍니다. 
 
 ### Lifetime analysis
 
