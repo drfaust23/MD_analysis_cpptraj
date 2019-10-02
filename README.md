@@ -151,4 +151,6 @@ LYS_146@OXT            SolventH      SolventDnr  1000629       2.4953       2.70
 DT_14@OP2              SolventH      SolventDnr  1000571       2.4952       2.7276     161.7065
 ```
 
+위의 결과에서 fraction이 1보다 큰 값이 나오는 이유는 2개 이상의 water molecule이 acceptor에 결합할 수 있기 때문입니다. 
 
+#### average salt bridge 
