@@ -157,7 +157,53 @@ DT_14@OP2              SolventH      SolventDnr  1000571       2.4952       2.72
 
 ### Lifetime analysis
 
-## How to run cpptraj
+## Clustering analysis
+
+```
+# STRIP IONS
+strip :WAT,Na+,Cl- outprefix no_solvent
+autoimage
+
+# Cluster analysis command:
+#  C0: Cluster output data set(s) name.
+# CLUSTERING OPTIONS:
+#  dbscan: Use the DBSCAN (density based) clustering algorithm.
+#    minpoints: Minimum # of points to form a cluster.
+#    epsilon: Distance cutoff for forming cluster.
+#    sievetoframe: Restore sieved frames by comparing to all cluster frames,
+#                  not just centroid.
+# DISTANCE METRIC OPTIONS:
+#  rms <mask>: Use RMSD of atoms in <mask> as distance metric.
+#  sieve 10  : Use <total> / 10 initial frames for clustering.
+# OUTPUT OPTIONS:
+#  out <file>: Write cluster number versus time to file.
+#  summary <file>: Write overall clustering summary to file.
+#  info <file>: Write detailed cluster results (including DBI, pSF etc) to file.
+#  cpopvtime <file> normframe: Write cluster population vs time to <file>,
+#                              normalized by # frames.
+# COORDINATE OUTPUT OPTIONS:
+#  repout <file prefix> repfmt pdb: Write cluster representatives to files with
+#                                   PDB format.
+#  singlerepout <file> singlerepfmt netcdf: Write cluster representatives to
+#                                           single file with NetCDF format.
+#  avgout <file> avgfmt restart: Write average over all frames in each cluster
+#                                to separate files with Amber restart file
+#                                format.
+
+cluster C0  dbscan minpoints 50 epsilon 2.5 \ 
+            sievetoframe   rms :1-148&!@H=  sieve 50 random  \ 
+	    out heavy_eps_3.0_cluster_cnumvtime.dat   \
+            sil Sil    \
+            summary heavy_eps_3.0_cluster_summary.dat \
+            info heavy_eps_3.0_cluster_info.dat \
+            cpopvtime heavy_eps_3.0_cluster_popv_time.agr normframe      \
+            repout rep repfmt pdb \
+            singlerepout heavy_eps_3.0_singlerep.nc singlerepfmt netcdf  \
+            avgout Avg avgfmt restart
+```
+
+
+## How to run cpptraj using single & multiple CPUs 
 
 한개의 cpu를 사용해서 많은 수의 frame을 처리할 때는 상당히 많은 시간이 걸리게 마련입니다. 
 시간을 줄이기 위해서 여러개의 cpu를 사용해서 계산을 수행할 수 있습니다.
