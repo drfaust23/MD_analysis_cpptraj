@@ -254,7 +254,8 @@ Lifetime analysis가 제대로 되었다면 다음과 같은 결과를 볼 수 �
 
 
 ## Clustering analysis
-Clustering analysis는 Trajectory안에 있는 다양한 구조들을 바탕으로 **유사한 구조들끼리 그룹으로 묶어주는** 분석을 수행합니다. 
+[Clustering analysis](https://en.wikipedia.org/wiki/Cluster_analysis)는 Trajectory안에 있는 다양한 구조들을 바탕으로 **유사한 구조들끼리 그룹으로 묶어주는** 분석을 수행합니다. 
+
 아래 cpptraj input에서 #으로 시작되는 부분은 모두 주석 부분입니다. 
 본문에서는 주석 내용을 조금 더 풀어서 자세히 설명하고자 합니다. 
 실제로 사용된 clustering 분석을 위한 cpptraj input file은 repository에 들어있는 clustering.in 파일을 참고하세요. 
@@ -300,6 +301,10 @@ cluster C0  dbscan minpoints 50 epsilon 2.5 \
             singlerepout heavy_eps_3.0_singlerep.nc singlerepfmt netcdf  \
             avgout Avg avgfmt restart
 ```
+
+위에 있는 cpptraj 명령을 찬찬히 살펴봅시다. 
+자세한 내용은 [cpptraj manual](https://amber-md.github.io/cpptraj/CPPTRAJ.xhtml)을 참고하세요.
+
 
 
 ## How to run cpptraj using single & multiple CPUs 
