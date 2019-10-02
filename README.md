@@ -183,12 +183,12 @@ series uuseries uuhbonds.agr uvseries uvhbonds.agr
 우분투에서 xmgrace가 설치되어 있지 않다면 apt으로 다음과 같이 간단히 설치할 수 있습니다. 
 
 ```console
-sudo apt install xmgrace
+foo@master:~$ sudo apt install xmgrace
 ```
 그 후에 다음 명령으로 그래프를 확인할 수 있습니다. 
 
 ```console
-xmgrace uuhbonds.agr
+foo@master:~$ xmgrace uuhbonds.agr
 ```
 
 
