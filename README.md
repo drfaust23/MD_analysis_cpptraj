@@ -290,15 +290,15 @@ strip :WAT,Na+,Cl- outprefix no_solvent
 #                                to separate files with Amber restart file
 #                                format.
 
-cluster C0  dbscan minpoints 50 epsilon 2.5 \ 
+cluster C0  dbscan minpoints 50 epsilon 2.0 \ 
             sievetoframe   rms :1-148&!@H=  sieve 50 random  \ 
-	    out heavy_eps_3.0_cluster_cnumvtime.dat   \
+	    out heavy_eps_2.0_cluster_cnumvtime.dat   \
             sil Sil    \
-            summary heavy_eps_3.0_cluster_summary.dat \
-            info heavy_eps_3.0_cluster_info.dat \
-            cpopvtime heavy_eps_3.0_cluster_popv_time.agr normframe      \
+            summary heavy_eps_2.0_cluster_summary.dat \
+            info heavy_eps_2.0_cluster_info.dat \
+            cpopvtime heavy_eps_2.0_cluster_popv_time.agr normframe      \
             repout rep repfmt pdb \
-            singlerepout heavy_eps_3.0_singlerep.nc singlerepfmt netcdf  \
+            singlerepout heavy_eps_2.0_singlerep.nc singlerepfmt netcdf  \
             avgout Avg avgfmt restart
 ```
 
