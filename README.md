@@ -153,9 +153,23 @@ DT_14@OP2              SolventH      SolventDnr  1000571       2.4952       2.72
 
 위의 결과에서 fraction이 1보다 큰 값이 나오는 이유는 2개 이상의 water molecule이 acceptor에 결합할 수 있기 때문입니다. 
 
-#### average salt bridge 
-[salt bridge(염다리)](https://en.wikipedia.org/wiki/Salt_bridge_(protein_and_supramolecular)는 이온결합과 수소결합이 동시에 나타나는 형태를 뜻합니다. 
-*bridgeout* option 뒤에 salt bridge 분석 결과가 출력될 파일의 이름을 써줍니다. 
+#### average salt bridge(염다리) 
+[salt bridge](https://en.wikipedia.org/wiki/Salt_bridge_(protein_and_supramolecular))는 이온결합과 수소결합이 동시에 나타나는 형태를 뜻합니다. 
+*bridgeout* option 뒤에 salt bridge 분석 결과가 출력될 파일의 이름을 써줍니다.
+제대로 계산이 되었다면 bridgeout 파일에는 다음과 같은 내용이 출력되게 됩니다. 
+```
+#Bridging Solute Residues:
+Bridge Res 11:DA   139:ASN , 236365 frames.
+Bridge Res 27:DT   93:ARG , 215152 frames.
+Bridge Res 10:DT   24:DT  , 179050 frames.
+Bridge Res 12:DA   24:DT  , 166091 frames.
+Bridge Res 13:DT   139:ASN , 156346 frames.
+Bridge Res 13:DT   23:DT  , 150718 frames.
+Bridge Res 14:DT   15:DG  , 140311 frames.
+Bridge Res 27:DT   84:ARG , 136692 frames.
+Bridge Res 25:DA   26:DC  , 133495 frames.
+```
+어떤 residue들이 얼마나 자주 salt bridge를 형성하는지 알 수 있습니다. 
 
 ### Lifetime analysis
 
