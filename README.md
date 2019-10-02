@@ -154,3 +154,33 @@ DT_14@OP2              SolventH      SolventDnr  1000571       2.4952       2.72
 위의 결과에서 fraction이 1보다 큰 값이 나오는 이유는 2개 이상의 water molecule이 acceptor에 결합할 수 있기 때문입니다. 
 
 #### average salt bridge 
+
+### Lifetime analysis
+
+## How to run cpptraj
+
+한개의 cpu를 사용해서 많은 수의 frame을 처리할 때는 상당히 많은 시간이 걸리게 마련입니다. 
+시간을 줄이기 위해서 여러개의 cpu를 사용해서 계산을 수행할 수 있습니다.
+이 때는 cpptraj.MPI 프로그램을 사용할 수 있습니다. 
+다음 slurm script는 28개의 cpu를 이용해서 trajectory 분석을 수행하는 예시입니다. 
+
+```
+#!/bin/bash
+#SBATCH -J HBOND
+#SBATCH -N 1
+#SBATCH -n 28
+#SBATCH -p pcpu
+
+module load compiler/intel 
+module load  openmpi/intel 
+
+source ~/apps/amber18/amber.sh
+
+mpirun -np 28 ~/apps/amber18/bin/cpptraj.MPI  -i  cpptraj_rmsd_hbond.in  &> cpptraj_rmsd_hbond.log
+```
+
+위 스크립트를 run.sh 라는 이름으로 저장했다면, 다음 명령을 입력해서 작업을 실행시킬 수 있습니다. 
+```
+sbatch run.sh 
+```
+
