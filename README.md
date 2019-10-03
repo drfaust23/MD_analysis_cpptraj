@@ -290,8 +290,8 @@ strip :WAT,Na+,Cl- outprefix no_solvent
 #                                to separate files with Amber restart file
 #                                format.
 
-cluster C0  dbscan minpoints 50 epsilon 2.0 \ 
-            sievetoframe   rms :1-148&!@H=  sieve 50 random  \ 
+cluster C0  dbscan minpoints 50 epsilon 2.0 rms :1-148&!@H=  \ 
+            sieve 50 random sievetoframe \ 
 	    out heavy_eps_2.0_cluster_cnumvtime.dat   \
             sil Sil    \
             summary heavy_eps_2.0_cluster_summary.dat \
@@ -319,7 +319,8 @@ dbscan 뒤에 오는 *minpoints*와 *epsilon* 옵션은 DBSCAN을 수행할 때 
 **즉, epsilon 값이 작으면 작을 수록 클러스터의 개수는 많아지고, epsilon값이 크면 클러스터의 개수는 적어지게 됩니다.**
 DBSCAN의 가장 큰 특징은 클러스트의 개수를 사용자가 미리 정하지 않고, 알고리즘에 의해서 결정된다는 것입니다. 
 
-
+***rms*** option은 구조들 사이의 거리를 계산할 때, rms keyword 뒤에 정의되어 있는 *mask*를 이용해서 atomic rmsd 값을 계산하겠다는 뜻입니다. 
+즉, 이 예제에서는 
 
 
 ## How to run cpptraj using single & multiple CPUs 
