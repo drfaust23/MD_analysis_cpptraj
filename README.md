@@ -155,7 +155,7 @@ DT_14@OP2              SolventH      SolventDnr  1000571       2.4952       2.72
 
 #### average salt bridge(염다리) 
 [salt bridge](https://en.wikipedia.org/wiki/Salt_bridge_(protein_and_supramolecular))는 이온결합과 수소결합이 동시에 나타나는 형태를 뜻합니다. 
-*bridgeout* option 뒤에 salt bridge 분석 결과가 출력될 파일의 이름을 써줍니다.
+***bridgeout*** option 뒤에 salt bridge 분석 결과가 출력될 파일의 이름을 써줍니다.
 제대로 계산이 되었다면 bridgeout 파일에는 다음과 같은 내용이 출력되게 됩니다. 
 ```
 #Bridging Solute Residues:
@@ -305,7 +305,7 @@ cluster C0  dbscan minpoints 50 epsilon 2.0 rms :1-148&!@H=  \
 위에 있는 cpptraj 명령을 찬찬히 살펴봅시다. 
 자세한 내용은 [cpptraj manual](https://amber-md.github.io/cpptraj/CPPTRAJ.xhtml)을 참고하세요.
 
-*cluster* 명령은 clustering 분석을 수행하겠다는 뜻입니다. 
+***cluster*** 명령은 clustering 분석을 수행하겠다는 뜻입니다. 
 cluster 명령 뒤에 나오는 C0는 데이터셋의 이름을 뜻합니다. 앞에서 했던 수소결합 분석과 유사하게 클러스터링 결과로 나오는 수치적인 데이터들이 C0라는 이름의 데이터셋이 모두 저장되게 됩니다. 
 
 그 뒤에 오는 *dbscan* keyword는 [DBSCAN](https://bcho.tistory.com/1205) 이라는 잘 알려진 *밀도기반* 클러스터링 알고리즘을 사용하겠다는 뜻입니다. 
@@ -313,8 +313,8 @@ DBSCAN 이외에도 다른 몇 가지 clustering 방식들이 존재하기 때�
 일반적으로 DBSCAN은 많은 경우 잘 작동하는 것으로 알려져있기 때문에 여기에서는 dbscan을 사용하겠습니다. 
 
 dbscan 뒤에 오는 *minpoints*와 *epsilon* 옵션은 DBSCAN을 수행할 때 필요한 option입니다. 
-*minpoints N*은 *N*개 이상의 데이터가 모였을 때, 하나의 클러스터로 간주하겠다는 뜻입니다. 
-*epsilon <dist>*은 *<dist>*로 정의된 거리 보다 짧은 거리 안에 존재하는 데이터를 하나의 클러스터로 묶어준다는 뜻입니다. 
+***minpoints N***은 *N*개 이상의 데이터가 모였을 때, 하나의 클러스터로 간주하겠다는 뜻입니다. 
+***epsilon <dist>***은 *<dist>*로 정의된 거리 보다 짧은 거리 안에 존재하는 데이터를 하나의 클러스터로 묶어준다는 뜻입니다. 
 
 **즉, epsilon 값이 작으면 작을 수록 클러스터의 개수는 많아지고, epsilon값이 크면 클러스터의 개수는 적어지게 됩니다.**
 DBSCAN의 가장 큰 특징은 클러스트의 개수를 사용자가 미리 정하지 않고, 알고리즘에 의해서 결정된다는 것입니다. 
@@ -332,30 +332,30 @@ DBSCAN의 가장 큰 특징은 클러스트의 개수를 사용자가 미리 정
 *random* keyword는 1/50개의 구조를 random하게 뽑겠다는 뜻입니다. 
 ***sievetoframe*** option은 초기 클러스터링을 위해서 처음에 체로 걸리진 구조를 나중에 클러스터링이 완성된 후에 다시 분류하겠다는 뜻 입니다. 
 
-*summary* keyword 다음에는 summary file의 이름을 지정해줍니다. 
+***summary*** keyword 다음에는 summary file의 이름을 지정해줍니다. 
 summary file에는 클러스터가 몇 개인지, 각 클러스터 사이즈는 어느 정도인지등을 요약해서 보여주게 됩니다. 
 
-*out* keyword 다음에 오는 output 파일에는 각 frame이 어떤 클러스터에 해당하는지를 보여줍니다. 
+***out*** keyword 다음에 오는 output 파일에는 각 frame이 어떤 클러스터에 해당하는지를 보여줍니다. 
 즉 X축은 frame number, Y축은 cluster index에 해당하는 정보가 들어있게 됩니다. 
 이 때, DBSCAN의 경우, noise의 개념이 있어서, 어떤 클러스터에도 해당하지 않는 데이터 포인트, noise에 해당하는 구조는 "-1"의 값을 가지게 됩니다. 
 
-*info* keyword에 해당하는 keyword 파일은 클러스터의 자세한 정보를 담고 있습니다. 
+***info*** keyword에 해당하는 keyword 파일은 클러스터의 자세한 정보를 담고 있습니다. 
 
-*cpopvtime* keyword에 해당하는 파일은 시간에 따라서 각 클러스터의 **누적 크기**를 보여주는 데이터를 저장합니다. 
+***cpopvtime*** keyword에 해당하는 파일은 시간에 따라서 각 클러스터의 **누적 크기**를 보여주는 데이터를 저장합니다. 
 그 뒤에 나오는 *normframe*의 keyword는 누적된 cluster의 크기를 전체 frame 개수로 나누어 정규화 시켜줍니다. 
 
-*sil* keyword 뒤에 나오는 단어는 각 구조의 실루엣(silhouette) 값을 가지고 있는 파일의 prefix를 의미합니다. 
+***sil*** keyword 뒤에 나오는 단어는 각 구조의 실루엣(silhouette) 값을 가지고 있는 파일의 prefix를 의미합니다. 
 *클러스터 실루엣* 값은 각 데이터 포인트가 클러스터에 얼마나 잘 포함되어 있는지를 보여줍니다. 
 어떤 데이터 포인트의 클러스터 실루엣 값이 1이면 그 데이터 포인트는 해당 클러스터의 다른 데이터 포인트와 매우 비슷하다는 뜻입니다. 
 만일 어떤 데이터 포인트가 클러스터 사이의 경계에 존재하면 그 값이 0에 가까워집니다. 
 실루엣 값이 -1에 가까우면, 그 데이터 포인트는 다른 클러스터에 속하는 것이 더 낫다는 것을 의미합니다. 
 
-*repout rep* 명령어는 각 클러스터의 대표 구조(representative structures)를 저장할 때, rep1, rep2, rep3, ...과 같이 저장되도록 *prefix*를 지정해주는 명령입니다. 
+***repout rep*** 명령어는 각 클러스터의 대표 구조(representative structures)를 저장할 때, rep1, rep2, rep3, ...과 같이 저장되도록 *prefix*를 지정해주는 명령입니다. 
 그 뒤에 따라오는 *repfmt pdb* 명령은 대표 구조들을 pdb 포맷을 저장하도록 합니다. 
 
-*singlerepout <file> singlerepfmt netcdf*는 모든 대표 구조들을 *<file>*에 [netcdf 포맷](https://en.wikipedia.org/wiki/NetCDF)으로 저장하라는 뜻입니다. 
+***singlerepout <file> singlerepfmt netcdf***는 모든 대표 구조들을 *<file>*에 [netcdf 포맷](https://en.wikipedia.org/wiki/NetCDF)으로 저장하라는 뜻입니다. 
 	
-*avgout <prefix> avgfmt restart*는 각 클러스터의 **평균** 구조를 Avg1.rst와 같은 형식으로 restart 파일 포맷으로 저장하라는 뜻입니다. 
+***avgout <prefix> avgfmt restart***는 각 클러스터의 **평균** 구조를 Avg1.rst와 같은 형식으로 restart 파일 포맷으로 저장하라는 뜻입니다. 
 
 
 ## How to run cpptraj using single & multiple CPUs 
