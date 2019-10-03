@@ -9,7 +9,7 @@ LCBC 학생들은 master의 /opt/amber18/에 설치되어 있는 Amber를 사용
 MD trajectory files. (*.nc or *.mdcrd)
 Parameter files. (*.prmtop)
 
-## Quick start
+## About cpptraj input script
 아래에 있는 script는 cpptraj 프로그램을 이용해서 MD trajectory에서 RMSD, hydrogen-bond, 그리고 lifetime 분석을 수행하는 script입니다.
 전체 파일은 같은 repository에 업로드 되어 있습니다.  
 
@@ -292,9 +292,9 @@ strip :WAT,Na+,Cl- outprefix no_solvent
 
 cluster C0  dbscan minpoints 50 epsilon 2.0 rms :1-148&!@H=  \ 
             sieve 50 random sievetoframe \ 
+	    summary heavy_eps_2.0_cluster_summary.dat \
 	    out heavy_eps_2.0_cluster_cnumvtime.dat   \
             sil Sil    \
-            summary heavy_eps_2.0_cluster_summary.dat \
             info heavy_eps_2.0_cluster_info.dat \
             cpopvtime heavy_eps_2.0_cluster_popv_time.agr normframe      \
             repout rep repfmt pdb \
@@ -320,7 +320,42 @@ dbscan 뒤에 오는 *minpoints*와 *epsilon* 옵션은 DBSCAN을 수행할 때 
 DBSCAN의 가장 큰 특징은 클러스트의 개수를 사용자가 미리 정하지 않고, 알고리즘에 의해서 결정된다는 것입니다. 
 
 ***rms*** option은 구조들 사이의 거리를 계산할 때, rms keyword 뒤에 정의되어 있는 *mask*를 이용해서 atomic rmsd 값을 계산하겠다는 뜻입니다. 
-즉, 이 예제에서는 
+즉, 이 예제에서는 1번에서 148번 residue에 있는 heavy atom을 이용해서 구조 사이의 거리를 계산하겠다는 뜻입니다. 
+
+***sieve 50 random*** option은 클러스터링에 걸리는 시간을 줄이기 위한 option입니다.
+*sieve*라는 단어는 *'체로 거르다'* 라는 뜻입니다. 
+클러스터링 계산 수행시, 가장 시간이 많이 걸리는 부분은 구조들 사이의 거리를 계산하는 부분입니다. 
+만일 내가 가진 Trajectory가 약 10만개의 구조를 가지고 있다면 그 구조들 사이의 거리를 모두 계산하려면 약 50억번의 계산이 필요합니다. 
+무척 시간이 많이 걸리는 계산이 될 것입니다. 
+이를 줄이기 위해서 초기 클러스터링 단계에서는 전체 구조를 다 사용하는 대신에 일부분만 사용해서 계산 시간을 줄여줄 수 있습니다. 
+이 예제에서는 전체에서 약 1/50에 해당하는 구조만 사용해서 초기 클러스터링을 수행하게 됩니다. 
+*random* keyword는 1/50개의 구조를 random하게 뽑겠다는 뜻입니다. 
+***sievetoframe*** option은 초기 클러스터링을 위해서 처음에 체로 걸리진 구조를 나중에 클러스터링이 완성된 후에 다시 분류하겠다는 뜻 입니다. 
+
+*summary* keyword 다음에는 summary file의 이름을 지정해줍니다. 
+summary file에는 클러스터가 몇 개인지, 각 클러스터 사이즈는 어느 정도인지등을 요약해서 보여주게 됩니다. 
+
+*out* keyword 다음에 오는 output 파일에는 각 frame이 어떤 클러스터에 해당하는지를 보여줍니다. 
+즉 X축은 frame number, Y축은 cluster index에 해당하는 정보가 들어있게 됩니다. 
+이 때, DBSCAN의 경우, noise의 개념이 있어서, 어떤 클러스터에도 해당하지 않는 데이터 포인트, noise에 해당하는 구조는 "-1"의 값을 가지게 됩니다. 
+
+*info* keyword에 해당하는 keyword 파일은 클러스터의 자세한 정보를 담고 있습니다. 
+
+*cpopvtime* keyword에 해당하는 파일은 시간에 따라서 각 클러스터의 **누적 크기**를 보여주는 데이터를 저장합니다. 
+그 뒤에 나오는 *normframe*의 keyword는 누적된 cluster의 크기를 전체 frame 개수로 나누어 정규화 시켜줍니다. 
+
+*sil* keyword 뒤에 나오는 단어는 각 구조의 실루엣(silhouette) 값을 가지고 있는 파일의 prefix를 의미합니다. 
+*클러스터 실루엣* 값은 각 데이터 포인트가 클러스터에 얼마나 잘 포함되어 있는지를 보여줍니다. 
+어떤 데이터 포인트의 클러스터 실루엣 값이 1이면 그 데이터 포인트는 해당 클러스터의 다른 데이터 포인트와 매우 비슷하다는 뜻입니다. 
+만일 어떤 데이터 포인트가 클러스터 사이의 경계에 존재하면 그 값이 0에 가까워집니다. 
+실루엣 값이 -1에 가까우면, 그 데이터 포인트는 다른 클러스터에 속하는 것이 더 낫다는 것을 의미합니다. 
+
+*repout rep* 명령어는 각 클러스터의 대표 구조(representative structures)를 저장할 때, rep1, rep2, rep3, ...과 같이 저장되도록 *prefix*를 지정해주는 명령입니다. 
+그 뒤에 따라오는 *repfmt pdb* 명령은 대표 구조들을 pdb 포맷을 저장하도록 합니다. 
+
+*singlerepout <file> singlerepfmt netcdf*는 모든 대표 구조들을 *<file>*에 [netcdf 포맷](https://en.wikipedia.org/wiki/NetCDF)으로 저장하라는 뜻입니다. 
+	
+*avgout <prefix> avgfmt restart*는 각 클러스터의 **평균** 구조를 Avg1.rst와 같은 형식으로 restart 파일 포맷으로 저장하라는 뜻입니다. 
 
 
 ## How to run cpptraj using single & multiple CPUs 
@@ -340,13 +375,35 @@ DBSCAN의 가장 큰 특징은 클러스트의 개수를 사용자가 미리 정
 module load compiler/intel 
 module load  openmpi/intel 
 
+source /opt/amber18/amber.sh
+
+mpirun -np 28 /opt/amber18/bin/cpptraj.MPI  -i  cpptraj_rmsd_hbond.in  &> cpptraj_rmsd_hbond.log
+```
+
+위 스크립트를 run_parallel_cpptraj.sh 라는 이름으로 저장했다면, 다음 명령을 입력해서 작업을 실행시킬 수 있습니다. 
+```
+sbatch run_parallel_cpptraj.sh 
+```
+
+만일 여러가지 이유로 parallel version이 error가 난다면 (......), 다음과 같이 serial version을 사용합시다. 
+
+```
+#!/bin/bash
+#SBATCH -J HBOND
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH -p pcpu
+
+module load compiler/intel 
+module load  openmpi/intel 
+
 source ~/apps/amber18/amber.sh
 
-mpirun -np 28 ~/apps/amber18/bin/cpptraj.MPI  -i  cpptraj_rmsd_hbond.in  &> cpptraj_rmsd_hbond.log
+/opt/amber18/bin/cpptraj -i  cpptraj_rmsd_hbond.in  &> cpptraj_rmsd_hbond.log
+
 ```
 
-위 스크립트를 run.sh 라는 이름으로 저장했다면, 다음 명령을 입력해서 작업을 실행시킬 수 있습니다. 
+위 스크립트를 run_parallel_cpptraj.sh 라는 이름으로 저장했다면, 다음 명령을 입력해서 작업을 실행시킬 수 있습니다. 
 ```
-sbatch run.sh 
+sbatch run_parallel_cpptraj.sh 
 ```
-
