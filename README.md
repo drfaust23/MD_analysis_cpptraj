@@ -378,7 +378,7 @@ xmgrace heavy_eps_2.0_cluster_popv_time.agr
 ***repout rep*** 명령어는 각 클러스터의 대표 구조(representative structures)를 저장할 때, rep1, rep2, rep3, ...과 같이 저장되도록 *prefix*를 지정해주는 명령입니다. 
 그 뒤에 따라오는 *repfmt pdb* 명령은 대표 구조들을 pdb 포맷을 저장하도록 합니다. 
 
-***singlerepout \<file\> singlerepfmt netcdf***는 모든 대표 구조들을 *\<file\>*에 [netcdf 포맷](https://en.wikipedia.org/wiki/NetCDF)으로 저장하라는 뜻입니다. 
+***singlerepout \<file\> singlerepfmt netcdf***는 모든 대표 구조들을 *<file>*에 [netcdf 포맷](https://en.wikipedia.org/wiki/NetCDF)으로 저장하라는 뜻입니다. 
 	
 ***avgout <prefix> avgfmt restart***는 각 클러스터의 **평균** 구조를 Avg1.rst와 같은 형식으로 restart 파일 포맷으로 저장하라는 뜻입니다. 
 
