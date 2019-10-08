@@ -349,10 +349,10 @@ cpopvtime 옵션의 결과 파일에 해당하는 **heavy_eps_2.0_cluster_popv_t
 xmgrace heavy_eps_2.0_cluster_popv_time.agr
 ```
 과 같이 실행시키면 xmgrace에서 다음과 같은 그림 파일을 생성합니다. 
-![cluster_popv_time](heavy_eps_2.0_cluster_popv_time.png)
+![cluster_popv_time](./heavy_eps_2.0_cluster_popv_time.png)
+위 그림에서 보면 초반에는 cluster2에 해당하는 구조가 많이 sampling이 되다가 시간이 지날 수록 줄어들고 다른 구조가 나타나기 시작하는 모습을 볼 수 있습니다. 
 
 
-heavy_eps_2.0_cluster_popv_time.ag
 ***sil*** keyword 뒤에 나오는 단어는 각 구조의 실루엣(silhouette) 값을 가지고 있는 파일의 prefix를 의미합니다. 
 *클러스터 실루엣* 값은 각 데이터 포인트가 클러스터에 얼마나 잘 포함되어 있는지를 보여줍니다. 
 어떤 데이터 포인트의 클러스터 실루엣 값이 1이면 그 데이터 포인트는 해당 클러스터의 다른 데이터 포인트와 매우 비슷하다는 뜻입니다. 
