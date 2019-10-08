@@ -354,6 +354,23 @@ summary file에는 클러스터가 몇 개인지, 각 클러스터 사이즈는 
 즉 X축은 frame number, Y축은 cluster index에 해당하는 정보가 들어있게 됩니다. 
 이 때, DBSCAN의 경우, noise의 개념이 있어서, 어떤 클러스터에도 해당하지 않는 데이터 포인트, noise에 해당하는 구조는 "-1"의 값을 가지게 됩니다. 
 
+위 스크립트의 결과 파일인 heavy_eps_2.0_cluster_cnumvtime.dat 파일을 다음과 같은 matplotlib 스크립트로 그림을 그리면 아래 그림과 같은 결과를 볼 수 있습니다. 
+```
+#!/usr/bin/env python
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
+dat = np.loadtxt('heavy_eps_2.0_cluster_cnumvtime.dat')
+plt.plot(dat[:,0], dat[:,1], 'ro', ms=2.0, label='Cluster Index')
+plt.xlabel('Frame')
+plt.ylabel('Cluster Index')
+plt.ylim(-2, 9)
+plt.yticks(range(-1,9))
+plt.savefig('heavy_eps_2.0_cluster_cnumvtime.png',format='png')
+```
+![cluster_cnumvtime](heavy_eps_2.0_cluster_cnumvtime.png)
+
+
 ***info*** keyword에 해당하는 keyword 파일은 클러스터의 자세한 정보를 담고 있습니다. 
 
 ***cpopvtime*** keyword에 해당하는 파일은 시간에 따라서 각 클러스터의 **누적 크기**를 보여주는 데이터를 저장합니다. 
