@@ -350,6 +350,7 @@ xmgrace heavy_eps_2.0_cluster_popv_time.agr
 ```
 과 같이 실행시키면 xmgrace에서 다음과 같은 그림 파일을 생성합니다. 
 ![cluster_popv_time](./heavy_eps_2.0_cluster_popv_time.png)
+
 위 그림에서 보면 초반에는 cluster2에 해당하는 구조가 많이 sampling이 되다가 시간이 지날 수록 줄어들고 다른 구조가 나타나기 시작하는 모습을 볼 수 있습니다. 
 
 
