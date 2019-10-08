@@ -368,12 +368,14 @@ plt.ylim(-2, 9)
 plt.yticks(range(-1,9))
 plt.savefig('heavy_eps_2.0_cluster_cnumvtime.png',format='png')
 ```
-==========================
+
 위 스크립트를 이용해서 그림을 그리면 아래 그림과 같이 시간에 따라서 구조가 어떤 클러스터에 속하는 것으로 변하는지를 볼 수 있습니다. 
+
 ![cluster_cnumvtime](heavy_eps_2.0_cluster_cnumvtime.png)
 
-위 그림에서는 처음에는 cluster2에 해당하는 구조가 나타나다가 시간이 지날 수록 cluster0에 해당하는 구조가 많이 나오는 것을 확인할 수 있 
+위 그림에서는 처음에는 cluster2에 해당하는 구조가 나타나다가 시간이 지날 수록 cluster0에 해당하는 구조가 많이 나오는 것을 확인할 수 있습니다. 
 
+---
 
 ***info*** keyword에 해당하는 keyword 파일은 클러스터의 자세한 정보를 담고 있습니다. 
 
@@ -403,7 +405,7 @@ xmgrace heavy_eps_2.0_cluster_popv_time.agr
 	
 ***avgout <prefix> avgfmt restart***는 각 클러스터의 **평균** 구조를 Avg1.rst와 같은 형식으로 restart 파일 포맷으로 저장하라는 뜻입니다. 
 
-
+---
 ## How to run cpptraj using single & multiple CPUs 
 
 한개의 cpu를 사용해서 많은 수의 frame을 처리할 때는 상당히 많은 시간이 걸리게 마련입니다. 
